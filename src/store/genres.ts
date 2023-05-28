@@ -1,6 +1,6 @@
 import axios from "axios";
 import { create } from "zustand";
-import { moviesByGenre } from "@/utils/constants";
+import { APIHOST, APIKEY, moviesByGenre } from "@/utils/constants";
 
 interface IGenres {
   filmsByGanre: string[];
@@ -20,8 +20,8 @@ const useGenres = create<IGenres>((set) => ({
         limit: "100",
       },
       headers: {
-        "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
-        "X-RapidAPI-Host": process.env.NEXT_PUBLIC_API_HOST,
+        "X-RapidAPI-Key": APIKEY,
+        "X-RapidAPI-Host": APIHOST,
       },
     });
 

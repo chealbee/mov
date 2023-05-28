@@ -8,14 +8,14 @@ import GetButton from "@/components/GetButton";
 import ShowMoreButton from "@/components/ShowMoreButton";
 import Genres from "./genres";
 import MoreInfo from "./MoreInfo";
-import { getOvervives } from "@/utils/constants";
+import { APIHOST, APIKEY, getOvervives } from "@/utils/constants";
 
 const getFilmDeteils = async (id: string) => {
   const res = await axios.get<IFilmInfo>(getOvervives, {
     params: { tconst: id },
     headers: {
-      "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
-      "X-RapidAPI-Host": process.env.NEXT_PUBLIC_API_HOST,
+      "X-RapidAPI-Key": APIKEY,
+      "X-RapidAPI-Host": APIHOST,
     },
   });
 

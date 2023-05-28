@@ -2,7 +2,7 @@ import { getRandom } from "@/utils/common";
 import axios from "axios";
 import { create } from "zustand";
 import { IUseAllFilms, singleFilm } from "../intefaces/interfaces";
-import { moviesByGenre } from "@/utils/constants";
+import { APIHOST, APIKEY, moviesByGenre } from "@/utils/constants";
 
 const useAllFilms = create<IUseAllFilms>((set, get) => ({
   films: [],
@@ -18,8 +18,8 @@ const useAllFilms = create<IUseAllFilms>((set, get) => ({
       "https://imdb8.p.rapidapi.com/title/get-top-rated-movies",
       {
         headers: {
-          "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
-          "X-RapidAPI-Host": process.env.NEXT_PUBLIC_API_HOST,
+          "X-RapidAPI-Key": APIKEY,
+          "X-RapidAPI-Host": APIHOST,
         },
       }
     );
@@ -42,8 +42,8 @@ const useAllFilms = create<IUseAllFilms>((set, get) => ({
         limit: "30",
       },
       headers: {
-        "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
-        "X-RapidAPI-Host": process.env.NEXT_PUBLIC_API_HOST,
+        "X-RapidAPI-Key": APIKEY,
+        "X-RapidAPI-Host": APIHOST,
       },
     });
 

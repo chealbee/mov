@@ -1,7 +1,6 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 import axios from "axios";
-import { topCredits } from "@/utils/constants";
+import { APIHOST, APIKEY, topCredits } from "@/utils/constants";
 
 export interface IActor {
   characters: string[];
@@ -44,8 +43,8 @@ export const useSingleFilm = create<IuseSingleFilm>()((set) => ({
         tconst: id,
       },
       headers: {
-        "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
-        "X-RapidAPI-Host": process.env.NEXT_PUBLIC_API_HOST,
+        "X-RapidAPI-Key": APIKEY,
+        "X-RapidAPI-Host": APIHOST,
       },
     });
     const data = res.data;

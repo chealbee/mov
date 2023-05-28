@@ -3,6 +3,7 @@ import axios from "axios";
 import { IFilmProps } from "@/intefaces/singleFIlm";
 import IsShowActorDeta from "./IsShowActorDeta";
 import BackButtobn from "@/components/BackButtobn";
+import { APIHOST, APIKEY } from "@/utils/constants";
 
 interface IMiniBio {
   author: string;
@@ -29,8 +30,8 @@ const getFilmDeteils = async (id: string) => {
         nconst: id,
       },
       headers: {
-        "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
-        "X-RapidAPI-Host": process.env.NEXT_PUBLIC_API_HOST,
+        "X-RapidAPI-Key": APIKEY,
+        "X-RapidAPI-Host": APIHOST,
       },
     }
   );

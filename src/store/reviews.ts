@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import axios from "axios";
-import { getUserReviews } from "@/utils/constants";
+import { APIHOST, APIKEY, getUserReviews } from "@/utils/constants";
 
 interface IReview {
   author: { displayName: string; userId: string };
@@ -33,8 +33,8 @@ export const useReviews = create<IuseReviews>()(
             tconst: id,
           },
           headers: {
-            "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
-            "X-RapidAPI-Host": process.env.NEXT_PUBLIC_API_HOST,
+            "X-RapidAPI-Key": APIKEY,
+            "X-RapidAPI-Host": APIHOST,
           },
         });
 

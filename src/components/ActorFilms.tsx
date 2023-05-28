@@ -8,6 +8,7 @@ import Preloader from "./Preloader";
 import { getIdFromKey } from "@/utils/common";
 import useIsACD from "@/app/actor/[id]/isSoweACD";
 import useAllFilms from "@/store/allFilms";
+import { APIHOST, APIKEY } from "@/utils/constants";
 
 interface IActorFilm {
   category: string;
@@ -49,8 +50,8 @@ const ActorFilms = ({ id }: { id: string }) => {
             nconst: id,
           },
           headers: {
-            "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
-            "X-RapidAPI-Host": process.env.NEXT_PUBLIC_API_HOST,
+            "X-RapidAPI-Key": APIKEY,
+            "X-RapidAPI-Host": APIHOST,
           },
         }
       );

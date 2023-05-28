@@ -1,7 +1,6 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 import axios from "axios";
-import { getUserReviews } from "@/utils/constants";
+import { APIHOST, APIKEY } from "@/utils/constants";
 
 interface IFilm {
   id: string;
@@ -45,8 +44,8 @@ export const useSeacrh = create<IuseReviews>()((set, get) => ({
           sortArg: "moviemeter,asc",
         },
         headers: {
-          "X-RapidAPI-Key": process.env.NEXT_PUBLIC_API_KEY,
-          "X-RapidAPI-Host": process.env.NEXT_PUBLIC_API_HOST,
+          "X-RapidAPI-Key": APIKEY,
+          "X-RapidAPI-Host": APIHOST,
         },
       }
     );

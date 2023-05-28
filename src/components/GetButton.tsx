@@ -4,7 +4,7 @@ import update from "@/images/refresh.png";
 import useAllFilms from "@/store/allFilms";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Search from "./AppSearch";
 
 const GetButton = ({

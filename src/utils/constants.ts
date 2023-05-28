@@ -10,3 +10,6 @@ export const moviesByGenre =
 
 export const getUserReviews =
   "https://imdb8.p.rapidapi.com/title/get-user-reviews";
+
+export const APIKEY = "5f9c8821c3msh8bfeb9384526f23p12f9f8jsn0f47520924c0";
+export const APIHOST = "imdb8.p.rapidapi.com";
