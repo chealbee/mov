@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import useIsACD from "./isSoweACD";
 import styles from "@/styles/Actor.module.css";
-import ActorFilms from "@/components/ActorFilms";
+import ActorFilms from "@/components/actorFilms/ActorFilms";
 
 const IsShowActorDeta = ({ id }: { id: string }) => {
   const isOpen = useIsACD((st) => st.ISOpen);

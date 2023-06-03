@@ -1,8 +1,7 @@
 import { getRandom } from "@/utils/common";
-import axios from "axios";
 import { create } from "zustand";
-import { IUseAllFilms, singleFilm } from "../intefaces/interfaces";
-import { APIHOST, APIKEY, moviesByGenre } from "@/utils/constants";
+import { IUseAllFilms } from "../intefaces/interfaces";
+import { allFilms } from "@/services/films";
 
 const useAllFilms = create<IUseAllFilms>((set, get) => ({
   films: [],
@@ -12,20 +11,11 @@ const useAllFilms = create<IUseAllFilms>((set, get) => ({
   isComplete: false,
   curentGanre: "",
   redirectinginHand: false,
+
   getAllFilms: async () => {
     set({ isloading: true });
-    const res = await axios.get<singleFilm[]>(
-      "https://imdb8.p.rapidapi.com/title/get-top-rated-movies",
-      {
-        headers: {
-          "X-RapidAPI-Key": APIKEY,
-          "X-RapidAPI-Host": APIHOST,
-        },
-      }
-    );
-    const data = res.data;
+    const data = await allFilms.getAllFilms();
     const randomFilm = data[getRandom(data.length)].id.split("/")[2];
-
     set({
       films: data,
       isloading: false,
@@ -33,21 +23,10 @@ const useAllFilms = create<IUseAllFilms>((set, get) => ({
       randomFilm: randomFilm,
     });
   },
+
   getAllFilmsbyGenres: async (genre: string) => {
     set({ isloading: true, curentGanre: genre });
-
-    const res = await axios.get<string[]>(moviesByGenre, {
-      params: {
-        genre: genre.toLowerCase().replaceAll(" ", "-"),
-        limit: "30",
-      },
-      headers: {
-        "X-RapidAPI-Key": APIKEY,
-        "X-RapidAPI-Host": APIHOST,
-      },
-    });
-
-    const data = res.data;
+    const data = await allFilms.getMoviesByGenre(genre);
     const randomFilm = data[getRandom(data.length)].split("/")[2];
     set({ isloading: false, randomFilm: randomFilm, randomsFilms: data });
   },

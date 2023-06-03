@@ -1,24 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import axios from "axios";
-import { APIHOST, APIKEY, getUserReviews } from "@/utils/constants";
-
-interface IReview {
-  author: { displayName: string; userId: string };
-  authorRating: number;
-  helpfulnessScore: number;
-  languageCode: string;
-  reviewText: string;
-  reviewTitle: string;
-  spoiler: boolean;
-  submissionDate: string;
-}
-
-interface IuseReviews {
-  isLoading: boolean;
-  reviews: IReview[];
-  getReviewsToFilm: (id: string) => void;
-}
+import { IuseReviews } from "@/types/reviews";
+import { reviews } from "@/services/reviews";
 
 export const useReviews = create<IuseReviews>()(
   persist(
@@ -27,18 +10,7 @@ export const useReviews = create<IuseReviews>()(
       reviews: [],
       getReviewsToFilm: async (id: string) => {
         set({ isLoading: true });
-
-        const res = await axios.get<{ reviews: IReview[] }>(getUserReviews, {
-          params: {
-            tconst: id,
-          },
-          headers: {
-            "X-RapidAPI-Key": APIKEY,
-            "X-RapidAPI-Host": APIHOST,
-          },
-        });
-
-        const data = res.data;
+        const data = await reviews.getUserReviews(id);
         set({ reviews: data.reviews, isLoading: false });
       },
     }),

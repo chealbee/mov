@@ -1,6 +1,5 @@
 import { create } from "zustand";
-import axios from "axios";
-import { APIHOST, APIKEY, topCredits } from "@/utils/constants";
+import { getSingleFim } from "@/services/getSingleFilm";
 
 export interface IActor {
   characters: string[];
@@ -38,16 +37,7 @@ export const useSingleFilm = create<IuseSingleFilm>()((set) => ({
 
   getCasts: async (id: string) => {
     set({ isloading: true });
-    const res = await axios.get<{ cast: IActor[] }>(topCredits, {
-      params: {
-        tconst: id,
-      },
-      headers: {
-        "X-RapidAPI-Key": APIKEY,
-        "X-RapidAPI-Host": APIHOST,
-      },
-    });
-    const data = res.data;
+    const data = await getSingleFim.fetchSingleFim(id);
     set({ casts: data.cast, isloading: false });
   },
 }));

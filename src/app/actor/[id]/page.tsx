@@ -4,23 +4,7 @@ import { IFilmProps } from "@/intefaces/singleFIlm";
 import IsShowActorDeta from "./IsShowActorDeta";
 import BackButtobn from "@/components/BackButtobn";
 import { APIHOST, APIKEY } from "@/utils/constants";
-
-interface IMiniBio {
-  author: string;
-  id: string;
-  language: string;
-  text: string;
-  userId: string;
-}
-interface ICtor {
-  id: string;
-  birthDate: string;
-  birthPlace: string;
-  image: { url: string; height: number; width: number };
-  name: string;
-  realName: string;
-  miniBios: IMiniBio[];
-}
+import { ICtor } from "./actoreInterfaces";
 
 const getFilmDeteils = async (id: string) => {
   const res = await axios.get<ICtor>(
