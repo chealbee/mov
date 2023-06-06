@@ -1,5 +1,5 @@
 import { IActor } from "@/store/singleFilsm";
-import { APIHOST, APIKEY, topCredits } from "@/utils/constants";
+import { baseHeaders, topCredits } from "@/utils/constants";
 import axios from "axios";
 
 export const getSingleFim = {
@@ -8,13 +8,9 @@ export const getSingleFim = {
       params: {
         tconst: id,
       },
-      headers: {
-        "X-RapidAPI-Key": APIKEY,
-        "X-RapidAPI-Host": APIHOST,
-      },
+      headers: baseHeaders,
     });
-    const data = res.data;
 
-    return data;
+    return res.data;
   },
 };

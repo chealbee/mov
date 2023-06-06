@@ -19,7 +19,5 @@ export interface IFind {
 export interface IuseSearch {
   isLoading: boolean;
   filmsbySeacrh: IFilm[];
-  isShow: boolean;
   searchFilms: (title: string) => void;
-  setIsShowSearchTooltip: (isShow?: boolean) => void;
 }

@@ -1,4 +1,4 @@
-import { APIHOST, APIKEY, moviesByGenre } from "@/utils/constants";
+import { baseHeaders, moviesByGenre } from "@/utils/constants";
 import axios from "axios";
 
 export const getGanres = {
@@ -8,10 +8,7 @@ export const getGanres = {
         genre: genre,
         limit: "100",
       },
-      headers: {
-        "X-RapidAPI-Key": APIKEY,
-        "X-RapidAPI-Host": APIHOST,
-      },
+      headers: baseHeaders,
     });
 
     return res.data;

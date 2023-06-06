@@ -15,25 +15,13 @@ export interface IActor {
 
 interface IuseSingleFilm {
   isloading: boolean;
-  isMoreInfo: boolean;
-  setShoweMore: (show?: boolean) => void;
   getCasts: (id: string) => void;
   casts: IActor[];
 }
 
 export const useSingleFilm = create<IuseSingleFilm>()((set) => ({
-  isMoreInfo: false,
   isloading: false,
   casts: [],
-  setShoweMore: (show) => {
-    if (show) {
-      set({ isMoreInfo: false });
-    } else {
-      set((state) => {
-        return { isMoreInfo: !state.isMoreInfo };
-      });
-    }
-  },
 
   getCasts: async (id: string) => {
     set({ isloading: true });

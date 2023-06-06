@@ -5,15 +5,11 @@ export interface singleFilm {
 
 export interface IUseAllFilms {
   randomsFilms: string[];
-  films: singleFilm[];
+  films: string[];
+  filmsByGanre: string[];
   isloading: boolean;
   randomFilm: string;
-  isComplete: boolean;
-  redirectinginHand: boolean;
   curentGanre: string;
   getAllFilms: () => void;
-  setREdirected: () => void;
-  setRandomFilm: (randomFilm?: string) => void;
-  setLoading: () => void;
   getAllFilmsbyGenres: (genre: string) => void;
 }

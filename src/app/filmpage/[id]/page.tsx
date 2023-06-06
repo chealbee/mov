@@ -1,25 +1,22 @@
 import styles from "@/styles/Movie.module.css";
 import Image from "next/image";
 import movieImg from "@/images/default-movie.jpg";
-import axios from "axios";
 import { convertDuration } from "@/utils/common";
-import { IFilmInfo, IFilmProps } from "./infaces";
-import GetButton from "@/components/GetButton";
-import ShowMoreButton from "@/components/ShowMoreButton";
-import Genres from "./genres";
+import GanreList from "@/components/ganre/GanreList";
 import MoreInfo from "./MoreInfo";
-import { APIHOST, APIKEY, getOvervives } from "@/utils/constants";
+import { fetchOvervives } from "@/services/getOvetvives";
+import GoToNextFilmButton from "@/components/ui/buttons/goToNextFilmBotton/GoToNextFilmButton";
+import AppSearch from "@/components/AppSearch";
 
 const getFilmDeteils = async (id: string) => {
-  const res = await axios.get<IFilmInfo>(getOvervives, {
-    params: { tconst: id },
-    headers: {
-      "X-RapidAPI-Key": APIKEY,
-      "X-RapidAPI-Host": APIHOST,
-    },
-  });
+  const data = await fetchOvervives.getOvevives(id);
+  return data;
+};
 
-  return res.data;
+type IFilmProps = {
+  params: {
+    id: string;
+  };
 };
 
 const page = async ({ params }: IFilmProps) => {
@@ -28,7 +25,10 @@ const page = async ({ params }: IFilmProps) => {
 
   return (
     <>
-      <GetButton text="Get next movie" id={params.id} />
+      <div className="actions">
+        <GoToNextFilmButton />
+        <AppSearch />
+      </div>
       <div className={styles.movie}>
         <div className={styles.title}>
           <h1 className={styles.h1}>{title?.title}</h1>
@@ -43,7 +43,7 @@ const page = async ({ params }: IFilmProps) => {
           <div className={styles.image}>
             <Image
               src={title?.image.url ? title?.image.url : movieImg}
-              alt={title.title}
+              alt={title?.title}
               width={title.image.width ? title.image.width : "300"}
               height={title.image.height ? title.image.height : "300"}
               quality="0.5"
@@ -66,12 +66,11 @@ const page = async ({ params }: IFilmProps) => {
             </div>
 
             <div className={styles.genres}>
-              <Genres genres={genres} />
+              <GanreList items={genres} />
             </div>
           </div>
         </div>
         <MoreInfo id={`${params.id}`} />
-        <ShowMoreButton styles={styles.more} />
       </div>
     </>
   );

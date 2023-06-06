@@ -2,7 +2,7 @@ import { allFilms } from "@/services/films";
 import { IActorFilm } from "@/types/actorFilm";
 import { useState } from "react";
 
-export const useFetchFilms = () => {
+export const useFetchAcorFilms = () => {
   const [isLoading, setLoading] = useState(false);
   const [films, setFilms] = useState<IActorFilm[]>([]);
 
@@ -10,13 +10,11 @@ export const useFetchFilms = () => {
     setLoading(true);
 
     const data = await allFilms.getAllFilmography(id);
-
     const filtered = data?.filmography?.filter(({ status, titleType }) => {
       return status === "released" && titleType === "movie";
     });
 
     setFilms(filtered);
-
     setLoading(false);
   };
 

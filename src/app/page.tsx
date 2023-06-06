@@ -1,5 +1,5 @@
+import GetFilmsButton from "@/components/ui/buttons/getFilmsButton/GetFilmsButton";
 import styles from "@/styles/Index.module.css";
-import GetButton from "@/components/GetButton";
 
 export default function Home() {
   return (
@@ -10,8 +10,7 @@ export default function Home() {
         <div className={styles.subtitle}>
           The best movie app of the Galaxy to help you find a movie tonight
         </div>
-
-        <GetButton cn={styles.update} id="/" />
+        <GetFilmsButton />
       </div>
     </>
   );

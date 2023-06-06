@@ -2,22 +2,21 @@
 import React, { useEffect } from "react";
 import styles from "@/styles/Cast.module.css";
 import useSingleFilm from "@/store/singleFilsm";
-import Preloader from "./ui/Preloader";
-import CastsFilms from "./casts/CastsFilms";
+import Preloader from "../ui/Preloader/Preloader";
+import CastsFilms from "./CastsFilms";
 
-const Casts = ({ id }: { id: string }) => {
+const Casts = ({ id, iShow }: { id: string; iShow: boolean }) => {
   const getCasts = useSingleFilm((st) => st.getCasts);
   const casts = useSingleFilm((st) => st.casts);
   const isloading = useSingleFilm((st) => st.isloading);
-  const isMoreInfo = useSingleFilm((st) => st.isMoreInfo);
 
   useEffect(() => {
-    if (isMoreInfo) getCasts(id);
-  }, [isMoreInfo]);
+    if (iShow) getCasts(id);
+  }, [iShow]);
 
   return (
     <>
-      {isMoreInfo ? (
+      {iShow ? (
         <div className={styles.cast}>
           <h2 className={styles.heading}>Cast</h2>
           {isloading ? <Preloader /> : <CastsFilms list={casts} />}

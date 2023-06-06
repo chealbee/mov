@@ -1,5 +1,5 @@
 import { IReview } from "@/types/reviews";
-import { APIHOST, APIKEY, getUserReviews } from "@/utils/constants";
+import { baseHeaders, getUserReviews } from "@/utils/constants";
 import axios from "axios";
 
 export const reviews = {
@@ -8,10 +8,7 @@ export const reviews = {
       params: {
         tconst: id,
       },
-      headers: {
-        "X-RapidAPI-Key": APIKEY,
-        "X-RapidAPI-Host": APIHOST,
-      },
+      headers: baseHeaders,
     });
 
     return res.data;

@@ -19,6 +19,7 @@ const useIsACD = create<IGenres>((set, get) => ({
   setfilmslimit: () => {
     set({ filmslimit: get().filmslimit + 5 });
   },
+
   clearfilmslimitsandisopen: () => {
     set({ ISOpen: false, filmslimit: 5 });
   },

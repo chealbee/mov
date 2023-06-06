@@ -1,4 +1,4 @@
-import Preloader from "@/components/ui/Preloader";
+import Preloader from "@/components/ui/Preloader/Preloader";
 import React from "react";
 
 const loading = () => {

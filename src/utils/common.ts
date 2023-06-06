@@ -8,3 +8,6 @@ export const convertDuration = (total: number) => {
 
   return `${hours}h ${minutes}m`;
 };
+
+export const getRandomFilm = (data: string[]) =>
+  data[getRandom(data.length)].split("/")[2];

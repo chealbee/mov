@@ -1,23 +1,15 @@
 import Link from "next/link";
-import React from "react";
 import styles from "@/styles/Film.module.css";
 import { IActorFilm } from "@/types/actorFilm";
 import { getIdFromKey } from "@/utils/common";
 
-const ActorFilmsList = ({
-  films,
-  handelClik,
-}: {
-  films: IActorFilm[];
-  handelClik: (to: string) => void;
-}) => {
+const ActorFilmsList = ({ films }: { films: IActorFilm[] }) => {
   return (
     <>
       {films.map(({ characters, id, image, title, year }) => (
         <Link
           href={`/filmpage/${getIdFromKey(id)}`}
           key={id}
-          onClick={() => handelClik(id)}
           className={styles.item}
         >
           {image?.url ? (

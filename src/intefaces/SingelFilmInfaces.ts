@@ -1,9 +1,3 @@
-export interface IFilmProps {
-  params: {
-    id: string;
-  };
-}
-
 export interface IFilmInfo {
   id: string;
   title: {

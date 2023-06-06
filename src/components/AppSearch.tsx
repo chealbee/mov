@@ -1,43 +1,43 @@
 "use client";
 import Image from "next/image";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 import search from "@/images/search.png";
 import refresh from "@/images/refresh.png";
 import useSeacrh from "@/store/seacrh";
-import SeacrhTooltip from "./SeacrhTooltip";
+import SeacrhTooltip from "./seacrhTooltip/SeacrhTooltip";
+import useDebounce from "@/hooks/useDebounce";
+import useOutside from "@/hooks/useOutside";
 
-const Search = () => {
-  const [timer, setTimer] = useState<ReturnType<typeof setTimeout>>();
+const AppSearch = () => {
   const [value, setValue] = useState("");
+  const debouncedValue = useDebounce(value);
+  const { isShow, ref, setIsShow } = useOutside<HTMLDivElement>(false);
 
   const isLoading = useSeacrh((st) => st.isLoading);
   const searchFilms = useSeacrh((st) => st.searchFilms);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
     if (isLoading) return;
-
-    setValue(value);
-    clearInterval(timer);
-
-    if (value) {
-      setTimer(
-        setTimeout(() => {
-          searchFilms(value);
-        }, 700)
-      );
-    }
+    setValue(e.target.value);
   };
 
+  useEffect(() => {
+    if (value.length > 2) {
+      searchFilms(value);
+      setIsShow(true);
+    }
+  }, [debouncedValue]);
+
   return (
-    <div className="search">
+    <div className="search" ref={ref}>
       <input
         type="text"
         name="title"
         placeholder="Search a movie..."
         value={value}
         onChange={handleChange}
+        onFocus={() => setIsShow(true)}
       />
       <Image
         className={`icon ${isLoading ? "loading" : ""}`}
@@ -46,9 +46,9 @@ const Search = () => {
         width={14}
         height={14}
       />
-      <SeacrhTooltip />
+      {isShow ? <SeacrhTooltip /> : null}
     </div>
   );
 };
 
-export default Search;
+export default AppSearch;

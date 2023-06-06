@@ -3,8 +3,7 @@ import "../styles/main.css";
 import styles from "@/styles/Home.module.css";
 
 export const metadata = {
-  title: "films app",
-  description: "search film for you",
+  title: "Films app",
 };
 
 export default function RootLayout({
