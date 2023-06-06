@@ -12,7 +12,6 @@ export const getACtorBio = baseUrl + "/actors/get-bio";
 export const getAllFilmography = baseUrl + "/actors/get-all-filmography";
 export const gatTopRatedMovies = baseUrl + "/title/get-top-rated-movies";
 export const findFilmByName = baseUrl + "/title/v2/find";
-
 export const baseHeaders = {
   "X-RapidAPI-Key": APIKEY,
   "X-RapidAPI-Host": APIHOST,
